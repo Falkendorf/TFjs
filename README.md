@@ -1,5 +1,5 @@
 # TFjs
-##TensorFlow.js projects
+## TensorFlow.js projects
 Most of the content is inspiered by the youtube channel of "The Coding Train". Youse this code as you whish for your own projects.
 
 ### linear regression : lReg
