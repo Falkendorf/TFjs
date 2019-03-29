@@ -1,0 +1,230 @@
+'.source.js':
+  'console.log':
+    'prefix':'log'
+    'body':'console.log(${1:"crash"});$2'
+
+  'tf.tensor()':
+    'prefix':'tftensor()'
+    'body':'tf.tensor($1);$2'
+    'description': 'tensor(values, shape?, dtype?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.scalar()':
+    'prefix':'tfscalar()'
+    'body':'tf.scalar($1);$2'
+    'description': 'scalar(values, dtype?):Scalar'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.tensor1d()':
+    'prefix':'tftensor1d()'
+    'body':'tf.tensor1d($1);$2'
+    'description': 'tensor1d(values, dtype?):Tensor1d'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.tensor2d()':
+    'prefix':'tftensor2d()'
+    'body':'tf.tensor2d($1);$2'
+    'description': 'tensor2d(values, shape?, dtype?):Tensor2d'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.tensor3d()':
+    'prefix':'tftensor3d()'
+    'body':'tf.tensor3d($1);$2'
+    'description': 'tensor3d(values, shape?, dtype?):Tensor3d'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.buffer()':
+    'prefix':'tfbuffer()'
+    'body':'tf.buffer($1);$2'
+    'description': 'buffer(shape, dtype?, values?):TensorBuffer'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.eye()':
+    'prefix':'tfeye()'
+    'body':'tf.eye($1);$2'
+    'description': 'eye(numRows, numColumns?, batchShape?, dtype?):Tensor2d'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.fill()':
+    'prefix':'tffill()'
+    'body':'tf.fill($1);$2'
+    'description': 'fill(shape, value, dtype?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.ones()':
+    'prefix':'tfones()'
+    'body':'tf.ones($1);$2'
+    'description': 'ones(shape, dtype?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.range()':
+    'prefix':'tfrange()'
+    'body':'tf.range($1);$2'
+    'description': 'range(start, stop, step?, dtype?):Tensor1d'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.variable()':
+    'prefix':'tfvariable()'
+    'body':'tf.variable($1);$2'
+    'description': 'variable(initialValue, traniable?, name?, dtype?):Variable'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.zeros()':
+    'prefix':'tfzeros()'
+    'body':'tf.zeros($1);$2'
+    'description': 'zeros(shape, dtype?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.split()':
+    'prefix':'tfsplit()'
+    'body':'tf.split($1);$2'
+    'description': 'split(x, numOrSizeSplits, axis?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.stack()':
+    'prefix':'tfstack()'
+    'body':'tf.stack($1);$2'
+    'description': 'stack(tensors, axis?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.split()':
+    'prefix':'.split()'
+    'body':'.split($1);$2'
+    'description': 'split(x, numOrSizeSplits, axis?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.stack()':
+    'prefix':'.stack()'
+    'body':'.stack($1);$2'
+    'description': 'stack(tensors, axis?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.sequential()':
+    'prefix':'tfsequential()'
+    'body':'tf.sequential($1);$2'
+    'description': 'sequential(config?):Sequential'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.add()':
+    'prefix':'.add()'
+    'body':'.add($1);$2'
+    'description': 'add(layer):layers.Layer'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.predict()':
+    'prefix':'.predict()'
+    'body':'.predict($1);$2'
+    'description': 'predict(x, args?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.fit()':
+    'prefix':'.fit()'
+    'body':'.fit($1);$2'
+    'description': 'fit(x, y, args?):Promise<History>'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.layers.dense()':
+    'prefix':'tf.layers.dense()'
+    'body':'tf.layers.dense($1);$2'
+    'description': 'layers.dense(args?):layers.Layer'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+
+  'tf.layers.dense(config)':
+    'prefix':'tf.layers.dense(config)'
+    'body':'tf.layers.dense({units:$1,activation:$2});$3'
+    'description': 'layers.dense(args?):layers.Layer'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.add':
+    'prefix':'.add'
+    'body':'.add($1);$2'
+    'description': 'add(a,b):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.sub':
+    'prefix':'.sub'
+    'body':'.sub($1);$2'
+    'description': 'sub(a,b):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.mul':
+    'prefix':'.mul'
+    'body':'.mul($1);$2'
+    'description': 'mul(a,b):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.div':
+    'prefix':'.div'
+    'body':'.div($1);$2'
+    'description': 'div(a,b):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.addN':
+    'prefix':'.addN'
+    'body':'.addN($1);$2'
+    'description': 'addN(tensors):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.floorDiv':
+    'prefix':'.floorDiv'
+    'body':'.floorDiv($1);$2'
+    'description': 'floorDiv(a,b):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.maximum':
+    'prefix':'.maximum'
+    'body':'.maximum($1);$2'
+    'description': 'maximum(a,b):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  'tf.pow':
+    'prefix':'tfpow'
+    'body':'tf.pow($1);$2'
+    'description': 'tf.pow(a,b):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+  '.matMul':
+    'prefix':'.matMul'
+    'body':'.matMul($1);$2'
+    'description': 'matMul(a(matrix)(matrix), b, transposA?, transposB?):Tensor'
+    'leftLabelHTML': '<span style="color:#ff0">TF</span>'
+
+
+
+'.source.gfm':
+  'array':
+    'prefix': 'arr'
+    'body': '\\\\begin{array}{c|c|c} $1 & $2 & $3 \\\\end{array}$4'
+
+  'Vector 2':
+    'prefix': 'v2'
+    'body':'\\\\begin{pmatrix} $1\\\\\\\\$2\\\\end{pmatrix}$3'
+
+  'Vector 3':
+    'prefix': 'v3'
+    'body':'\\\\begin{pmatrix} $1\\\\\\\\$2\\\\\\\\$3\\\\end{pmatrix}$4'
+
+  'Matrix 3x3':
+    'prefix': 'm33'
+    'body':'\\\\begin{pmatrix} $1 & $2 & $3\\\\\\\\$4 & $5 & $6\\\\\\\\$7 & $8 & $9 \\\\end{pmatrix}$10'
+
+  'Matrix 3x2':
+    'prefix': 'm32'
+    'body':'\\\\begin{pmatrix} $1 & $2\\\\\\\\$3 & $4\\\\\\\\$5 & $6\\\\end{pmatrix}$7'
+
+  'Matrix 2x2':
+    'prefix': 'm22'
+    'body':'\\\\begin{pmatrix} $1 & $2\\\\\\\\$3 & $4\\\\end{pmatrix}$5'
+
+  'boxed':
+    'prefix':'box'
+    'body':'\\\\boxed{$1}'
+
+  'texttt':
+    'prefix':'texttt'
+    'body':'\\\\texttt{$1}'
+
+  'langle':
+    'prefix':'langl'
+    'body':'\\\\langle $1\\\\rangle'
