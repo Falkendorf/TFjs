@@ -33,9 +33,16 @@ class State {
     let r = diameter/2;
     ellipse(this.x*diameter+r,this.y*diameter+r,diameter,diameter);
     if (this.fin)
-      ellipse(this.x*diameter+r,this.y*diameter+r,diameter-2,diameter-2);
+      ellipse(this.x*diameter+r,this.y*diameter+r,diameter/1.3,diameter/1.3);
     fill(0);
+    textSize(15);
     text(this.q,(this.x*diameter+r)-8,(this.y*diameter+r)+4);
+  }
+
+  drawConnections(){
+    for (let j in this.cons){
+      this.cons[j].draw(this.x,this.y);
+    }
   }
 
   isFinit(){
@@ -65,5 +72,19 @@ class State {
 
   getY(){
     return this.y;
+  }
+
+  addConnection(condition, destination){
+    for (let i in this.cons){
+      if (this.cons[i].getEndState() == destination){
+        this.cons[i].addCondition(condition);
+        return;
+      }
+    }
+    this.cons.push(new Connection(destination,[condition]));
+  }
+
+  getConnections(){
+    return this.cons;
   }
 }

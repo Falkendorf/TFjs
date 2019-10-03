@@ -13,11 +13,31 @@ class DFA extends Automata{
   }
 
   draw(){
-    //this.drawConnections();
     super.draw();
   }
 
-  drawConnections(){
+  addConnection(condition){
+    let start;
+    for (let i in this.qs){
+        if (this.qs[i].isSelected()){
+          start = this.qs[i];
+          break;
+        }
+    }
+    if (start==null)return;
+    var cons = start.getConnections();
+    for (let con in cons){
+      var conditions = cons[con].getConditions();
+      for (let condi in conditions){
+        if (conditions[condi] == condition){
+          return;
+        }
+      }
+    }
+    super.addConnection(condition);
+  }
+
+  /*drawConnections(){
     let sameCons = [];
     let bow = [];
     for (let i in this.connections){
@@ -50,7 +70,7 @@ class DFA extends Automata{
     for (let i in sameCons){
       sameCons[i].draw(this.qs,bow[i]);
     }
-  }
+  }*/
 
   printConnections(){
 

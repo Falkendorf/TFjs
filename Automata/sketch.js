@@ -1,13 +1,14 @@
 var diameter=40,x=20,y=10,w,h;
 
 var automata;
-var btnAddQ,btnDFA,btnNFA,btnAddConnection;
-var selChar,selCurQ,selnextQ;
+var btnAddQ,btnDFA,btnNFA,btnConnection,btnSetToFinit,btnUnselectAll;
 var tBoxQ;
 
 //interaction
 var mouseOnHold=false;
 var lastX,lastY;
+var mode=0;
+var activChar;
 
 function setup() {
   w=diameter*x;
@@ -42,18 +43,17 @@ function createInterface(){
   btnAddQ.position(w+50,75);
   btnAddQ.mousePressed(addState);
 
-  selChar = createSelect();
-  selChar.position(w+50,120);
-  selChar.option('a');
-  selChar.option('b');
-  selCurQ = createSelect();
-  selCurQ.position(w+100,120);
-  selnextQ = createSelect();
-  selnextQ.position(w+150,120);
+  btnSetToFinit= createButton('Set selected state to finite');
+  btnSetToFinit.position(w+50,100);
+  btnSetToFinit.mousePressed(setFinit);
 
-  btnAddConnection = createButton('Create connection');
-  btnAddConnection.position(w+200,120);
-  btnAddConnection.mousePressed(addConnection);
+  btnUnselectAll= createButton('Unselect all');
+  btnUnselectAll.position(w+50,125);
+  btnUnselectAll.mousePressed(unSelAll);
+
+  btnMode = createButton('Switch Mode');
+  btnMode.position(w+25,h-15);
+  btnMode.mousePressed(switchMode);
 }
 
 function createDFA(){
@@ -67,21 +67,33 @@ function createNFA(){
 
 function addState(){
   if (!automata.addQ())return;
-  updateSelect();
 }
 
-function addConnection(){
-
+function switchMode(){
+  if (mode == 0){
+    mode = 1;
+  }else{
+    mode = 0;
+  }
+  automata.unSelAll();
 }
 
 function draw() {
   background(200);
   drawGrid();
+  var str = (mode==0)?"Mode: Change state position.":"Mode: Create connections.";
+  stroke(255,100,100);
+  textSize(20);
+  text(str,w-275,h-10);
+  text("Active Condition: "+activChar,w-275,h-30);
   if (automata!=null){
     automata.draw();
     interaction();
-
   }
+}
+
+function keyPressed() {
+  activChar = key;
 }
 
 function interaction(){
@@ -89,12 +101,24 @@ function interaction(){
     if (mouseIsPressed == true){
       if (mouseX>0&&mouseX<w&&mouseY>0&&mouseY<h){
         stroke(0);
-        if (positionChanged()&&mouseOnHold){
-            //moved state
-            console.log("updated state pos!");
-            automata.updateStateOnGridPos();
+        if (mode == 0){
+          if (positionChanged()&&mouseOnHold){
+              //moved state
+              console.log("updated state pos!");
+              automata.updateStateOnGridPos();
+          }
+          //simple click
+          if (!mouseOnHold){
+            automata.interactGrid();
+          }
+        }else if (mode == 1&&!mouseOnHold){
+          if (automata.isSomeSel()){
+            automata.addConnection(activChar);
+            automata.unSelAll();
+          }else{
+            automata.interactGrid();
+          }
         }
-        automata.interactGrid();
       }
       mouseOnHold=true;
     }else{
@@ -113,8 +137,10 @@ function positionChanged(){
   return retVal;
 }
 
-function updateSelect(){
-  let arr = automata.getqs().length-1;
-  selCurQ.option('q'+arr);
-  selnextQ.option('q'+arr);
+function setFinit(){
+  automata.setToFinit();
+}
+
+function unSelAll(){
+  automata.unSelAll();
 }

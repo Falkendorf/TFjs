@@ -1,23 +1,38 @@
 class Connection{
-  constructor(startState,endState,char){
-    this.startState = startState;
+  constructor(endState,conditions){
     this.endState = endState;
-    this.char = char;
-  }
-
-  getStartState(){
-    return this.startState;
+    this.conditions = conditions;
   }
 
   getEndState(){
     return this.endState;
   }
 
-  getChar(){
-    return this.char;
+  getConditions(){
+    return this.conditions;
   }
 
-  draw(qs,bow){
+  addCondition(condition){
+    for (let con in this.conditions){
+      if (this.conditions[con] == condition)return;
+    }
+    this.conditions.push(condition);
+  }
+
+  draw(xx,yy){
+    let xDest = this.endState.getX();
+    let yDest = this.endState.getY();
+    let r = diameter/2;
+    stroke(0);
+    line(xx*diameter+r,yy*diameter+r,xDest*diameter+r,yDest*diameter+r);
+    let xmid = ((xx*diameter+r)+(xDest*diameter+r))/2;
+    let ymid = ((yy*diameter+r)+(yDest*diameter+r))/2;
+    fill(0);
+    textSize(15);
+    text(this.conditions,xmid,ymid);
+  }
+
+  /*draw(qs,bow){
     let x1=0,x2=0;
     let count = qs.length;
     for (let i in qs){
@@ -46,7 +61,7 @@ class Connection{
       text(this.char,(x2+x1)/2,height/2);
     }
     console.log(this.toString()+' '+bow);
-  }
+  }*/
 
   toString(){
     return this.char+":"+this.startState+"-->"+this.endState;

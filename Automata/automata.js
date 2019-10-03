@@ -7,6 +7,7 @@ class Automata {
     this.alpha = alphabet;
     this.grid = [];
     this.initGrid();
+    this.isGridSel = false;
   }
 
   initGrid(){
@@ -16,6 +17,21 @@ class Automata {
           column.push(null);
         }
         this.grid.push(column);
+    }
+  }
+
+  unSelAll(){
+    for (let i in this.qs){
+      this.qs[i].unselect();
+    }
+    this.isGridSel = false;
+  }
+
+  setToFinit(){
+    for (let i in this.qs){
+      if (this.qs[i].isSelected()){
+        this.qs[i].changeFinit();
+      }
     }
   }
 
@@ -43,11 +59,37 @@ class Automata {
     let yy=floor(mouseY/diameter);
     if(this.grid[xx][yy]!=null){
       this.grid[xx][yy].select(this.qs);
+      this.isGridSel = true;
     }
+  }
+
+  isSomeSel(){
+    return this.isGridSel;
   }
 
   draw(){
     this.drawQs();
+    this.drawConnections();
+  }
+
+  drawConnections(){
+    for (let i in this.qs){
+      this.qs[i].drawConnections();
+    }
+  }
+
+  addConnection(condition){
+    if (condition==null)return;
+    let dest = this.grid[floor(mouseX/diameter)][floor(mouseY/diameter)];
+    let start;
+    for (let i in this.qs){
+        if (this.qs[i].isSelected()){
+          start = this.qs[i];
+          break;
+        }
+    }
+    if (start==null)return;
+    start.addConnection(condition,dest);
   }
 
   drawQs(){
