@@ -1,6 +1,17 @@
+function function1() {
+  var ul = document.getElementById("smth");
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode("Four"));
+  li.setAttribute("id", "element4"); // added line
+  ul.appendChild(li);
+  alert(li.id);
+}
+
 function setup(){
   noCanvas();
+  //function1();
 
+  /*
   const t1 = tf.tensor1d([1,2,3,4]);
   const t2 = tf.ones([4,4]);
   const t3 = tf.range(0,4,1);//tf.tensor1d([0,1,2,3]);
@@ -60,5 +71,5 @@ model1.compile({
   //console.log(vtense.print());
   //tense.print();
   //vtense.print();
-  //console.log(data);
+  //console.log(data);*/
 }

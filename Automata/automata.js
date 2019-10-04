@@ -68,8 +68,8 @@ class Automata {
   }
 
   draw(){
-    this.drawQs();
     this.drawConnections();
+    this.drawQs();
   }
 
   drawConnections(){
@@ -107,11 +107,14 @@ class Automata {
   }
 
   getq0(){
-    return this.q0;
+    if (this.qs.length>0){
+      return this.qs[0];
+    }
+    return null;
   }
 
   getf(){
-    return this.f;
+
   }
 
   addQ(){
