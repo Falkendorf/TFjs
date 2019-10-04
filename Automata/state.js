@@ -35,7 +35,7 @@ class State {
     if (this.fin)
       ellipse(this.x*diameter+r,this.y*diameter+r,diameter/1.3,diameter/1.3);
     fill(0);
-    textSize(15);
+    textSize(diameter/4);
     text(this.q,(this.x*diameter+r)-8,(this.y*diameter+r)+4);
   }
 

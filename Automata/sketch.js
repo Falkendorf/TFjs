@@ -1,4 +1,4 @@
-var diameter=40,x=20,y=10,w,h;
+var diameter=80,x=20,y=10,w,h;
 
 var automata;
 var btnAddQ,btnDFA,btnNFA,btnConnection,btnSetToFinit,btnUnselectAll;

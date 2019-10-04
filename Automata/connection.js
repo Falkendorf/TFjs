@@ -28,17 +28,17 @@ class Connection{
     let xmid = ((xx*diameter+r)+(xDest*diameter+r))/2;
     let ymid = ((yy*diameter+r)+(yDest*diameter+r))/2;
     fill(0);
-    textSize(15);
+    textSize(diameter/4);
     text(this.conditions,xmid,ymid);
     translate((xDest*diameter+r),(yDest*diameter+r),0);
     var deltaY = (yDest*diameter+r) - (yy*diameter+r);
     var deltaX = (xDest*diameter+r) - (xx*diameter+r);
-    var angleInDegrees = atan2(deltaY, deltaX) * 180 / PI;
-    rotate(-angleInDegrees);
-    stroke(0,255,0);
-    fill(0);
-    ellipse(diameter,0,diameter/4,diameter/4)
+    var angleInDegrees = atan2(deltaY, deltaX)
     rotate(angleInDegrees);
+    stroke(0);
+    fill(0);
+    triangle(-diameter/2,0,-diameter/1.5,-diameter/4,-diameter/1.5,diameter/4);
+    rotate(-angleInDegrees);
     translate(-(xDest*diameter+r),-(yDest*diameter+r),0);
   }
 
