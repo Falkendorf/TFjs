@@ -84,8 +84,9 @@ function draw() {
   var str = (mode==0)?"Mode: Change state position.":"Mode: Create connections.";
   stroke(255,100,100);
   textSize(20);
-  text(str,w-275,h-10);
-  text("Active Condition: "+activChar,w-275,h-30);
+  textAlign(RIGHT,BOTTOM);
+  text(str,w-5,h-5);
+  text("Active Condition: "+activChar,w-5,h-30);
   if (automata!=null){
     automata.draw();
     interaction();

@@ -81,6 +81,7 @@ class Automata {
   addConnection(condition){
     if (condition==null)return;
     let dest = this.grid[floor(mouseX/diameter)][floor(mouseY/diameter)];
+    if (dest==null)return;
     let start;
     for (let i in this.qs){
         if (this.qs[i].isSelected()){
@@ -119,9 +120,11 @@ class Automata {
 
   addQ(){
     let count = this.qs.length;
-    if (count>=10)return false;
-    this.qs.push(new State('q'+count,count*2,y/2));
-    this.grid[count*2][y/2] = this.qs[count];//true;
+    if (count>=(x*y/4))return false;
+    var xPos = (1+count*2)%x;
+    var yPos =1+floor(count/(x/2))*2;
+    this.qs.push(new State('q'+count,xPos,yPos));
+    this.grid[xPos][yPos] = this.qs[count];//true;
     console.log("Added new state!");
     return true;
   }

@@ -36,12 +36,22 @@ class State {
       ellipse(this.x*diameter+r,this.y*diameter+r,diameter/1.3,diameter/1.3);
     fill(0);
     textSize(diameter/4);
-    text(this.q,(this.x*diameter+r)-8,(this.y*diameter+r)+4);
+    textAlign(CENTER,CENTER);
+    text(this.q,(this.x*diameter+r),(this.y*diameter+r));
   }
 
   drawConnections(){
     for (let j in this.cons){
-      this.cons[j].draw(this.x,this.y);
+      //check for backtroute
+      var followBack = false;
+      var back = this.cons[].getEndState().getConnections();
+      for (let k in back){
+        if (back[k].getEndState().getState = this.q){
+          followBack = true;
+          break;
+        }
+      }
+      this.cons[j].draw(this.x,this.y,followBack);
     }
   }
 

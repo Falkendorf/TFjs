@@ -19,27 +19,57 @@ class Connection{
     this.conditions.push(condition);
   }
 
-  draw(xx,yy){
+  draw(xx,yy,followBack){
     let xDest = this.endState.getX();
     let yDest = this.endState.getY();
+    if (xx==xDest&&yy==yDest){
+      this.drawbow(xx,yy);
+      return;
+    }
+    if (followBack){
+      this.drawSpline(xx,yy,xDest,yDest);
+    }
     let r = diameter/2;
     stroke(0);
     line(xx*diameter+r,yy*diameter+r,xDest*diameter+r,yDest*diameter+r);
-    let xmid = ((xx*diameter+r)+(xDest*diameter+r))/2;
-    let ymid = ((yy*diameter+r)+(yDest*diameter+r))/2;
     fill(0);
     textSize(diameter/4);
-    text(this.conditions,xmid,ymid);
-    translate((xDest*diameter+r),(yDest*diameter+r),0);
-    var deltaY = (yDest*diameter+r) - (yy*diameter+r);
-    var deltaX = (xDest*diameter+r) - (xx*diameter+r);
-    var angleInDegrees = atan2(deltaY, deltaX)
-    rotate(angleInDegrees);
+    textAlign(CENTER,BOTTOM);
+    text(this.conditions,getMid(xx,xDest),getMid(yy,yDest));
+    translocate(xDest,yDest,xx,yy);
     stroke(0);
     fill(0);
-    triangle(-diameter/2,0,-diameter/1.5,-diameter/4,-diameter/1.5,diameter/4);
-    rotate(-angleInDegrees);
-    translate(-(xDest*diameter+r),-(yDest*diameter+r),0);
+    arrowHead(-diameter/2,0);
+    relocate(xDest,yDest,xx,yy);
+  }
+
+  drawbow(xx,yy){
+    var r = diameter/2;
+    xx=xx*diameter+r;
+    yy=yy*diameter+r;
+    stroke(0);
+    noFill();
+    let x1 = xx-(sin(22.5)*r);
+    let y1 = yy+(cos(22.5)*r);
+    let x2 = xx+(sin(22.5)*r);
+    bezier(x1,y1,xx+diameter*0.8,yy-diameter*1.5,xx-diameter*0.8,yy-diameter*1.5,x2,y1);
+    translate(xx,yy,0);
+    var angle = atan2(yy-y1,xx-x1);
+    rotate(angle);
+    translocate();
+    stroke(0);
+    fill(0);
+    arrowHead(-diameter/2,0);
+    rotate(-angle);
+    translate(-xx,-yy,0);
+    fill(0);
+    textSize(diameter/4);
+    textAlign(CENTER,BOTTOM);
+    text(this.conditions,xx,yy-diameter*1.25);
+  }
+
+  drawSpline(x1,y1,x2,y2){
+    //draw spline...
   }
 
   /*draw(qs,bow){
