@@ -30,6 +30,14 @@ class State {
     stroke(0);
     fill(255);
     if (this.isSel)fill(0,0,255);
+    if (currentState!=null){
+      if (this.q==currentState.getState()){
+        fill(0,255,0);
+        if (leftWord==null&&!this.fin){
+          fill(255,0,0);
+        }
+      }
+    }
     let r = diameter/2;
     ellipse(this.x*diameter+r,this.y*diameter+r,diameter,diameter);
     if (this.fin)
@@ -44,9 +52,9 @@ class State {
     for (let j in this.cons){
       //check for backtroute
       var followBack = false;
-      var back = this.cons[].getEndState().getConnections();
+      var back = this.cons[j].getEndState().getConnections();
       for (let k in back){
-        if (back[k].getEndState().getState = this.q){
+        if (back[k].getEndState().getState() == this.q){
           followBack = true;
           break;
         }
@@ -97,4 +105,18 @@ class State {
   getConnections(){
     return this.cons;
   }
+
+  getNextState(chr){
+    for (let i in this.cons){
+      var conds = this.cons[i].getConditions();
+      for (let j in conds){
+        if (conds[j]==chr){
+          //got it
+          return this.cons[i].getEndState();
+        }
+      }
+    }
+    return null;
+  }
+
 }

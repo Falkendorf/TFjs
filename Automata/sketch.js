@@ -1,8 +1,8 @@
 var diameter=80,x=20,y=10,w,h;
 
 var automata;
-var btnAddQ,btnDFA,btnNFA,btnConnection,btnSetToFinit,btnUnselectAll;
-var tBoxQ;
+var btnAddQ,btnDFA,btnNFA,btnConnection,btnSetToFinit,btnUnselectAll,btnCheckWord;
+var tBoxQ,inCheckWord;
 
 //interaction
 var mouseOnHold=false;
@@ -13,7 +13,8 @@ var activChar;
 function setup() {
   w=diameter*x;
   h=diameter*y;
-  createCanvas(w, h);
+  var can = createCanvas(w, h);
+  can.parent("can");
   background(0);
   createInterface();
 }
@@ -29,31 +30,56 @@ function drawGrid(){
 }
 
 function createInterface(){
-  var l = createP('Create:');
-  l.position(w+50,10);
+  var sav = w;
+  w=5;
   btnDFA = createButton('DFA');
-  btnDFA.position(w+100,25);
+  btnDFA.position(w+0,75);
   btnDFA.mousePressed(createDFA);
+  btnDFA.parent("menu");
+  btnDFA.addClass("btn");
 
   btnNFA = createButton('NFA');
-  btnNFA.position(w+150,25);
+  btnNFA.position(w+100,75);
   btnNFA.mousePressed(createNFA);
+  btnNFA.parent("menu");
+  btnNFA.addClass("btn");
 
   btnAddQ = createButton('Add state');
-  btnAddQ.position(w+50,75);
+  btnAddQ.position(w+0,125);
   btnAddQ.mousePressed(addState);
+  btnAddQ.parent("menu");
+  btnAddQ.addClass("btn");
 
-  btnSetToFinit= createButton('Set selected state to finite');
-  btnSetToFinit.position(w+50,100);
+  btnSetToFinit= createButton('Set selected state\n to finite');
+  btnSetToFinit.position(w+0,175);
   btnSetToFinit.mousePressed(setFinit);
+  btnSetToFinit.parent("menu");
+  btnSetToFinit.addClass("btn");
 
   btnUnselectAll= createButton('Unselect all');
-  btnUnselectAll.position(w+50,125);
+  btnUnselectAll.position(w+0,225);
   btnUnselectAll.mousePressed(unSelAll);
+  btnUnselectAll.parent("menu");
+  btnUnselectAll.addClass("btn");
 
   btnMode = createButton('Switch Mode');
-  btnMode.position(w+25,h-15);
+  btnMode.position(w+0,300);
   btnMode.mousePressed(switchMode);
+  btnMode.parent("menu");
+  btnMode.addClass("btn");
+
+  btnCheckWord = createButton("Check Word");
+  btnCheckWord.position(150,25);
+  btnCheckWord.mousePressed(startAnimation);
+  btnCheckWord.parent("animate");
+  btnCheckWord.addClass("btn");
+
+  inCheckWord = createInput();
+  inCheckWord.position(300,25);
+  inCheckWord.parent("animate");
+  inCheckWord.addClass("in");
+
+  w=sav;
 }
 
 function createDFA(){
@@ -81,7 +107,7 @@ function switchMode(){
 function draw() {
   background(200);
   drawGrid();
-  var str = (mode==0)?"Mode: Change state position.":"Mode: Create connections.";
+  var str = (mode==0)?"Mode: Change state.":"Mode: Create connections.";
   stroke(255,100,100);
   textSize(20);
   textAlign(RIGHT,BOTTOM);
@@ -90,6 +116,7 @@ function draw() {
   if (automata!=null){
     automata.draw();
     interaction();
+    animate();
   }
 }
 
@@ -127,6 +154,8 @@ function interaction(){
     }
   }
 }
+
+
 
 function positionChanged(){
   let xx=floor(mouseX/diameter);

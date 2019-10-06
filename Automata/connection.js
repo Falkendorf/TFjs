@@ -28,6 +28,7 @@ class Connection{
     }
     if (followBack){
       this.drawSpline(xx,yy,xDest,yDest);
+      return;
     }
     let r = diameter/2;
     stroke(0);
@@ -56,7 +57,7 @@ class Connection{
     translate(xx,yy,0);
     var angle = atan2(yy-y1,xx-x1);
     rotate(angle);
-    translocate();
+    //translocate();
     stroke(0);
     fill(0);
     arrowHead(-diameter/2,0);
@@ -69,7 +70,35 @@ class Connection{
   }
 
   drawSpline(x1,y1,x2,y2){
-    //draw spline...
+    let r = diameter/2;
+    var deltaY = (y1*diameter+r) - (y2*diameter+r);
+    var deltaX = (x1*diameter+r) - (x2*diameter+r);
+    var len = sqrt(pow(deltaX,2)+pow(deltaY,2));
+    translocate(x2,y2,x1,y1);
+    stroke(0);
+    noFill();
+    var offy =sin(22.5)*r;
+    var offx =cos(22.5)*r;
+    curve(diameter,diameter,offx,offy,-len-offx,offy,-len-diameter,diameter);
+    translate(offx,offy,0);
+    var deltaX = (diameter) - (-len-offx);
+    var deltaY = (diameter) - (offy);
+    var angleInDegrees = atan2(deltaY, deltaX);
+    rotate(angleInDegrees);
+    stroke(0);
+    fill(0);
+    arrowHead(0,0);
+    rotate(-angleInDegrees);
+    translate(-offx,-offy,0);
+    relocate(x2,y2,x1,y1);
+
+    fill(0);
+    textSize(diameter/4);
+    textAlign(CENTER,CENTER);
+    offx = (y1==y2)?0:(y1>y2)?-diameter/2:diameter/2;//(abs(x1-x2)>abs(y1-y2))?0:(x1-x2>0)?-diameter:diameter;
+    offy = (x1==x2)?0:(x1>x2)?diameter/2:-diameter/2;
+    //console.log("y1:"+y1+" y2:"+y2+" offy:"+offy);
+    text(this.conditions,getMid(x1,x2)+offx,getMid(y1,y2)+offy);
   }
 
   /*draw(qs,bow){
