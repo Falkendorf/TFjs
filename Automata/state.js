@@ -29,7 +29,7 @@ class State {
   draw(){
     stroke(0);
     fill(255);
-    if (this.isSel)fill(0,0,255);
+    if (this.isSel)fill(200);
     if (currentState!=null){
       if (this.q==currentState.getState()){
         fill(0,255,0);

@@ -20,7 +20,7 @@ function setup() {
 }
 
 function drawGrid(){
-  stroke(75);
+  stroke(200);
   for (i=0;i<x;i++){
     line(i*diameter,0,i*diameter,height);
   }
@@ -105,7 +105,7 @@ function switchMode(){
 }
 
 function draw() {
-  background(200);
+  background(255);
   drawGrid();
   var str = (mode==0)?"Mode: Change state.":"Mode: Create connections.";
   stroke(255,100,100);

@@ -1,9 +1,10 @@
 var currentWord = null;
 var leftWord = null;
 var currentState = null;
+var speed=15;
 
 function animate(){
-  if (frameCount%60==0){
+  if (frameCount%speed==0){
     if (leftWord!=null){
       //make the next move
       currentState = currentState.getNextState(leftWord.charAt(0));
